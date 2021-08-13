@@ -26,3 +26,11 @@ select distinct l1.num as consecutiveNums
 from logs as l1
 inner join logs as l2 on l2.id = l1.id+1 and l2.num = l1.num
 inner join logs as l3 on l3.id = l1.id+2 and l3.num = l1.num
+
+----------------------------------------------------------------
+select (sub.num) from
+(Select Num,
+lead(Num,1) over(order by ID) as lead_Num1,
+lead(Num,2) over(order by ID) as lead_Num2
+from logs) sub
+where sub.num=sub.lead_Num1 and sub.lead_Num1=sub.lead_Num2
