@@ -1,0 +1,14 @@
+
+Find the date with the highest total energy consumption from the Facebook data centers. Output the date along with the total energy consumption across all data centers.
+
+
+with total_energy as (
+select date, sum (consumption) total from 
+(select * from fb_eu_energy
+union all
+select * from fb_asia_energy
+union all
+select * from fb_na_energy)a 
+group by date)
+
+select date,total from total_energy where total =(select max(total) from total_energy )
