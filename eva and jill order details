@@ -1,0 +1,4 @@
+select tab.first_name,tab.order_date,tab.order_details,tab.total_order_cost 
+from (select * from 
+customers c join orders o on c.id =o.cust_id and c.first_name in ('Jill','Eva')
+order by c.id )tab
